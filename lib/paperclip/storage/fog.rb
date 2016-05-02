@@ -169,7 +169,6 @@ module Paperclip
         warn("#{e} - cannot copy #{path(style)} to local file #{local_dest_path}")
         false
       end
-
       private
 
       def dynamic_fog_host_for_style(style)
