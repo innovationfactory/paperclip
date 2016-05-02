@@ -157,11 +157,12 @@ module Paperclip
         env = Object.const_defined?(:Rails) ? Rails.env : nil
         (creds[env] || creds).symbolize_keys
       end
-
+      
       def copy_to_local_file(style, local_dest_path)
         log("copying #{path(style)} to local file #{local_dest_path}")
         ::File.open(local_dest_path, 'wb') do |local_file|
           file = directory.files.get(path(style))
+          raise ::Fog::Errors::Error, "File not found" unless file
           local_file.write(file.body)
         end
       rescue ::Fog::Errors::Error => e
